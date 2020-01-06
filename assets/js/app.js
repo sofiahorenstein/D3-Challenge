@@ -176,7 +176,7 @@ data.forEach(function(data) {
     .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 12)
+    .attr("r", 15)
     .attr("opacity", ".5");
     
   var textGroup = chartGroup.selectAll(".stateText")
@@ -191,10 +191,10 @@ data.forEach(function(data) {
     .text(function(d){return d.abbr});
 
 
-  var xlabelsGroup = chartGroup.append("g")
+  var xLabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-  var healthcareLabel = xlabelsGroup.append("text")
+  var healthcareLabel = xLabelsGroup.append("text")
     .classed("aText", true)
     .attr("x", 0)
     .attr("y", 20)
@@ -202,7 +202,7 @@ data.forEach(function(data) {
     .classed("active", true)
     .text("% of People who Lack Health Care");
 
-  var ageLabel = xlabelsGroup.append("text")
+  var ageLabel = xLabelsGroup.append("text")
     .classed ("aText", true)
     .attr("x", 0)
     .attr("y", 40)
@@ -210,7 +210,7 @@ data.forEach(function(data) {
     .classed("inactive", true)
     .text("Median Age");
 
-  var smokersLabel = xlabelsGroup.append("text")
+  var smokersLabel = xLabelsGroup.append("text")
     .classed ("aText", true)
     .attr("x", 0)
     .attr("y", 60)
@@ -229,20 +229,25 @@ data.forEach(function(data) {
     .attr("dy", "1em")
     .attr("transform", "rotate(-90)")
     .attr("value", "income")
+    .classed("active",true)
     .text("Median Household Income");
 
-  var obesityLabel = ylabelsGroup.append("text")
+  var obesityLabel = yLabelsGroup.append("text")
     .classed("aText", true)
     .attr("x", 0)
     .attr("y", 0 - 60)
+    .attr("dy", "1em")
+    .attr("transform", "rotate(-90)")
     .attr("value", "obesity") // value to grab for event listener
     .classed("inactive", true)
     .text("% of People with Obesity");
 
-  var povertyLabel = ylabelsGroup.append("text")
+  var povertyLabel = yLabelsGroup.append("text")
     .classed("aText", true)
     .attr("x", 0)
     .attr("y", 0 - 40)
+    .attr("dy", "1em")
+    .attr("transform", "rotate(-90)")
     .attr("value", "poverty") // value to grab for event listener
     .classed("inactive", true)
     .text("% of People in Poverty");
@@ -251,7 +256,7 @@ data.forEach(function(data) {
   var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
   // x axis labels event listener
-  XlabelsGroup.selectAll("text")
+  xLabelsGroup.selectAll("text")
     .on("click", function() {
       // get value of selection
       var value = d3.select(this).attr("value");
@@ -316,7 +321,7 @@ data.forEach(function(data) {
         }
     });
 
-YlabelsGroup.selectAll("text")
+yLabelsGroup.selectAll("text")
     .on("click", function() {
       // get value of selection
       var value = d3.select(this).attr("value");
